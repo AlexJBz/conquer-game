@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html>
+	<head>
+		<title></title>
+		<link rel="stylesheet" href="css/style.css"/>
+	</head>
+	<body>
+		<div class="background"></div>
+		<div id="createCountryBody" class="createCountryBody">
+			<h1 id="createCountryTitle">Create Your Country</h1>
+			<input id="countryNameInput" type="text" placeholder="Country name..."/><br/>
+			<input id="countryLeaderInput" type="text" placeholder="Your name..."/>
+			<button class="RandomName">Random</button>
+			<button class="CreateCountry">Create</button>
+		</div>
+		<div id="difficultySelector" class="createCountryBody">
+			<h1 id="difSelectTitle">Select a Difficulty</h1>
+			<button class="wider difficultyButton" data-mode="easy">Easy</button><br/>
+			<button class="wider orange difficultyButton" data-mode="normal">Normal</button><br/>
+			<button class="wider red difficultyButton" data-mode="hard">Hard</button>
+		</div>
+		<script src="game/jquery-3.3.1.min.js"></script>
+		<script src="game/game.js"></script>
+	</body>
+</html>
