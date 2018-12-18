@@ -4,45 +4,78 @@ body {
     overflow: hidden;
     background-color:transparent;
 }
-
 .background {
     width:100%;
     height:100%;
     position: absolute;
     background-image:linear-gradient(to bottom right, #0072ba, #009dff);
 }
-
-.createCountryBody {
+.mainDiv {
     margin:auto;
     position:fixed;
     top:0;
     bottom:0;
     left:0;
     right:0;
-    width:300px;
-    height:198px;
     background-color:white;
     border:2px;
     border:solid 2px #d1d1d1;
-    border-radius:5px;
-    text-align: center;
+    text-align:center;
     box-shadow: 3px 3px 5px #0072ba;
+    border-radius:5px;
 }
-
-.createCountryBody#difficultySelector {
+.mainDiv.countryInfo {
+    visibility: hidden;
+    text-align: left;
+    margin-top:5px;
+    margin-left:5px;
+    width:350px;
+    height:250px;
+}
+.mainDiv.mainDiv.countryInfo p.pDif {
+    float:right;
+    align-self: right;
+    text-align:center;
+    font-weight: bolder;
+    margin-right:15px;
+    width:65px;
+    padding-left:0px;
+    margin-bottom:5px;
+}
+.mainDiv.countryInfo hr {
+    width:95%;
+    border:1px solid black;
+    box-shadow: 1px 1px 3px grey;
+}
+.mainDiv.mainDiv.countryInfo p {
+    padding-left:15px;
+}
+.mainDiv.countryInfo p.leader {
+    font-weight: bolder;
+}
+.mainDiv.mainDiv.countryInfo h1 {
+    width:245px;
+    float:left;
+    margin:0px 0px 0px 15px;
+    overflow: hidden;
+}
+.mainDiv.create {
+    width:300px;
+    height:198px;
+}
+.mainDiv.difficulty {
     visibility: hidden;
     width:250px;
+    height:198px;
 }
-
-.createCountryBody h1 {
+.mainDiv h1 {
     font-weight:bolder;
     font-size:24px;
     margin:auto;
     padding-top:10px;
-    text-align:center;
-}
 
-.createCountryBody input {
+}
+.mainDiv input {
     text-align:center;
     margin-top:15px;
     width:80%;
@@ -54,12 +87,10 @@ body {
     font-weight:bold;
     box-shadow: 2px 2px 4px #cccccc;
 }
-
-.createCountryBody input:focus {
+.mainDiv input:focus {
     background-color:#f4f4f4;
 }
-
-.createCountryBody button {
+.mainDiv button {
     box-shadow: 2px 2px 4px #cccccc;
     color:white;
     margin-top:15px;
@@ -72,39 +103,30 @@ body {
     background-color:#12842d;
     width:100px;
 }
-
-.createCountryBody button:hover {
+.mainDiv button:hover {
     background-color:#0d7c28;
 }
-
-.createCountryBody button:active {
+.mainDiv button:active {
     background-color:#0c6d23;
 }
-
-.createCountryBody button.wider{
+.mainDiv button.wider{
     width: 70%;
 }
-
-.createCountryBody button.orange {
+.mainDiv button.orange {
     background: #ff9900;
 }
-
-.createCountryBody button.orange:hover {
+.mainDiv button.orange:hover {
     background: #ed8e00;
 }
-
-.createCountryBody button.orange:active {
+.mainDiv button.orange:active {
     background: #dd8400;
 }
-
-.createCountryBody button.red {
+.mainDiv button.red {
     background: #ff0000;
 }
-
-.createCountryBody button.red:hover {
+.mainDiv button.red:hover {
     background: #ed0000;
 }
-
-.createCountryBody button.red:active {
+.mainDiv button.red:active {
     background: #e00000;
 }

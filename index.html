@@ -8,18 +8,23 @@
 	</head>
 	<body>
 		<div class="background"></div>
-		<div id="createCountryBody" class="createCountryBody">
+		<div id="createCountryBody" class="mainDiv create">
 			<h1 id="createCountryTitle">Create Your Country</h1>
 			<input id="countryNameInput" type="text" placeholder="Country name..."/><br/>
 			<input id="countryLeaderInput" type="text" placeholder="Your name..."/>
 			<button class="RandomName">Random</button>
 			<button class="CreateCountry">Create</button>
 		</div>
-		<div id="difficultySelector" class="createCountryBody">
+		<div id="difficultySelector" class="mainDiv difficulty">
 			<h1 id="difSelectTitle">Select a Difficulty</h1>
 			<button class="wider difficultyButton" data-mode="easy">Easy</button><br/>
 			<button class="wider orange difficultyButton" data-mode="normal">Normal</button><br/>
 			<button class="wider red difficultyButton" data-mode="hard">Hard</button>
+		</div>
+		<div id="conInfo" class="mainDiv countryInfo"> 
+			<h1 id="conName">CountryName</h1><p class="pDif">Dfcty</p>
+			<hr/>
+			<p id="conLeader" class="leader">CountryLeader</p>
 		</div>
 		<script src="game/jquery-3.3.1.min.js"></script>
 		<script src="game/game.js"></script>
