@@ -5,10 +5,9 @@ var countryNames = ["Afghanistan","Albania","Algeria","Andorra","Angola","Anguil
 
 //Classes
 class Country {
-	constructor(name, leadername, treasury, land, milpower, ecopower){
+	constructor(name, leadername, land, milpower, ecopower){
 		this.name = name;
 		this.leadername = leadername;
-		this.treasury = treasury;
 		this.land = land;
 		this.milpower = milpower;
 		this.ecopower = ecopower;
@@ -16,8 +15,8 @@ class Country {
 }
 
 class EconomyHandler {
-	constructor(){
-
+	constructor(money){
+		this.money = money;
 	}
 }
 
@@ -28,20 +27,22 @@ class MilitaryHandler {
 }
 
 class ManpowerHandler {
-	constructor(totalManpower){
-		this.totalManpower = totalManpower;
+	constructor(manpower){
+		this.manpower = manpower;
 	}
 }
 
 class LandHandler {
-	constructor(totalLand){
-		this.totalLand = totalLand;
+	constructor(land){
+		this.availableLand = land;
+		this.totalLand = land;
 	}
 }
 
 class AICountry {
-	constructor(name, treasury, land, milpower, ecopower){
+	constructor(name, leadername, treasury, land, milpower, ecopower){
 		this.name = name;
+		this.leadername = leadername; 
 		this.treasury = treasury;
 		this.land = land;
 		this.milpower = milpower;
@@ -49,12 +50,12 @@ class AICountry {
 	}
 }
 
-$('.CreateCountry').on('click', function() {
+$(".CreateCountry").on('click', function() {
 	let countryName = $("#countryNameInput").val();
 	let playerName = $("#countryLeaderInput").val();
 	var title = $("#createCountryTitle");
 	if (countryName != "" && playerName != "") {
-		player.country = new Country(countryName, playerName, 0, 0, 0, 0);
+		player.country = new Country(countryName, playerName, 0, 0, 0);
 		$("#createCountryBody").remove();
 		$("#difficultySelector").css("visibility", "visible");
 	} else if (countryName == "" && playerName != "") {
@@ -69,11 +70,11 @@ $('.CreateCountry').on('click', function() {
 	}
 });
 
-$('.RandomName').on('click', function() {
+$(".RandomName").on('click', function() {
 	$("#countryNameInput").val(countryNames[Math.floor(Math.random() * countryNames.length+1)]);
 });
 
-$('.difficultyButton').on('click', function(){
+$(".difficultyButton").on('click', function(){
 	switch ($(this).data('mode')) {
 		case "easy":
 			player.difficulty = 1.5;
@@ -103,9 +104,33 @@ $('.difficultyButton').on('click', function(){
 	}
 });
 
+$(".slideDiv").on('mouseover', function(){
+	if ($(this).css("left") == "-120px") {
+		$(this).animate({left:'0px'}, {queue: false, duration: 250});
+	}
+});
+
+$(".slideDiv").on('mouseleave', function(){
+	if ($(this).css("left") == "0px") {
+		$(this).animate({left:'-120px'}, {queue: false, duration: 250});
+	}
+});
+
 function InitializeCountry(){
 	$("#conInfo").css("visibility", "visible");
 	$("#conName").html(player.country.name);
-	$("#conLeader").html("Leader: " + player.country.leadername)
 	game.active = true;
+	player.eco = new EconomyHandler(0);
+	console.log(player.eco.money);
+	$("#moneyDisplay").html(FormatNumberText(player.eco.money));
+	player.mil = new MilitaryHandler();
+	player.land = new LandHandler(1000);
+	$("#landDisplay").html(FormatNumberText(player.land.availableLand));
+	player.manpower = new ManpowerHandler(5000);
+	$("#manDisplay").html(FormatNumberText(player.manpower.manpower));
+	$(".slideDiv").css("visibility", "visible");
+}
+
+function FormatNumberText(number){
+	return number;
 }
