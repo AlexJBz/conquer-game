@@ -104,6 +104,18 @@ $(".difficultyButton").on('click', function(){
 	}
 });
 
+$(".countryInfo").on('mouseover', function(){
+	if ($(this).css("left") == "-350px") {
+		$(this).animate({left:'0px'}, {queue: false, duration: 250});
+	}
+});
+
+$(".countryInfo").on('mouseleave', function(){
+	if ($(this).css("left") == "0px") {
+		$(this).animate({left:'-350px'}, {queue: false, duration: 250});
+	}
+});
+
 $(".slideDiv").on('mouseover', function(){
 	if ($(this).css("left") == "-120px") {
 		$(this).animate({left:'0px'}, {queue: false, duration: 250});
