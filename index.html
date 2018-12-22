@@ -4,7 +4,9 @@
 	<head>
 		<title>Conquer Game &bull; 0</title>
 		<link rel="icon" href="icon.ico"/>
+		<link rel="stylesheet" href="css/themify-icons.css"/>
 		<link rel="stylesheet" href="css/style.css"/>
+		<meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no,width=device-width">
 	</head>
 	<body>
 		<div class="background"></div>
@@ -21,29 +23,71 @@
 			<button class="wider orange difficultyButton" data-mode="normal">Normal</button><br/>
 			<button class="wider red difficultyButton" data-mode="hard">Hard</button>
 		</div>
-		<div id="conInfo" class="mainDiv countryInfo"> 
-			<div class="mainContent">
-				<h1 id="conName">CountryName</h1><p class="pDif">Dfcty</p>
-				<hr/>
-				<p class="stats"><b>Money: </b><span id="moneyDisplay">0</span></p>
-				<p class="stats"><b>Land: </b><span id="landDisplay">0</span></p>
-				<p class="stats"><b>Manpower: </b><span id="manDisplay">0</span></p>
-				<p class="stats"><b>Military Power: </b><span id="milDisplay">0</span></p>
-				<p class="stats"><b>Economy Power: </b><span id="ecoDisplay">0</span></p>
+		<div class="row">
+			<div class="column">
+				<div id="conInfo" class="mainDiv countryInfo"> 
+					<div class="mainContent">
+						<h1 id="conName">CountryName</h1><p class="pDif">Dfcty</p>
+						<hr/>
+						<p class="stats"><b>Money: </b><span id="moneyDisplay">0</span></p>
+						<p class="stats"><b>Economy Power: </b><span id="ecoDisplay">0</span></p>
+						<p class="stats"><b>Land: </b><span id="landDisplay">0</span></p>
+						<p class="stats"><b>Manpower: </b><span id="manDisplay">0</span></p>
+						<p class="stats"><b>Military Power: </b><span id="milDisplay">0</span></p>
+					</div>
+					<span class="ti-bar-chart label"></span>
+				</div>
+				<div class="slideDiv eco" data-page="Economy" >
+					<p>Economy</p><span class="ti-world"></span>
+				</div>
+				<div class="slideDiv land" data-page="Land">
+					<p>Land</p><span class="ti-map-alt"></span>
+				</div>
+				<div class="slideDiv man" data-page="Manpower">
+					<p>Manpower</p><span class="ti-user"></span>
+				</div>
+				<div class="slideDiv mil" data-page="Military">
+					<p>Military</p><span class="ti-target"></span>
+				</div>
 			</div>
-			<div class="label">Stats</div>
-		</div>
-		<div class="slideDiv eco">
-			<span>Eco</span>
-		</div>
-		<div class="slideDiv land">
-			<span>Land</span>
-		</div>
-		<div class="slideDiv man">
-			<span>Mpwr</span>
-		</div>
-		<div class="slideDiv mil">
-			<span>Mil</span>
+			<div class="column right">
+				<div class="mainDiv page">
+					<h1 id="pageTitle">Title</h1>
+					<hr/>
+					<div class="parent">
+						<div class="child economy">
+							<div class="content">
+								<p><b>Coal Stockpile: </b><span id="coalStockpile">0</span></p>
+								<p><b>Oil Stockpile: </b><span id="oilStockpile">0</span></p>
+								<p><b>Steel Stockpile: </b><span id="steelStockpile">0</span></p>
+								<p><b>Iron Stockpile: </b><span id="ironStockpile">0</span></p>
+								<p><b>Bricks Stockpile: </b><span id="bricksStockpile">0</span></p>
+							</div>
+						</div>
+						<div class="child land">
+							<div class="content">
+								<p><b>Total Land: </b><span id="totalLand">0</span></p>
+								<p><b>Land Available: </b><span id="landAvailable">0</span></p>
+								<p><b>Land Used: </b><span id="landUsed">0</span></p>
+							</div>
+						</div>
+						<div class="child manpower">
+							<div class="content">
+								<p><b>Total Manpower: </b><span id="totalManpower">0</span></p>
+								<p><b>Manpower Available: </b><span id="manpowerAvailable">0</span></p>
+								<p><b>Manpower Used: </b><span id="manpowerUsed">0</span></p>
+							</div>
+						</div>
+						<div class="child military">
+							<div class="content">
+								<p><b>Army Units: </b><span id="armyUnitCount">0</span></p>
+								<p><b>Navy Units: </b><span id="navyUnitCount">0</span></p>
+								<p><b>Airforce Units: </b><span id="airforceUnitCount">0</span></p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 		<script src="game/jquery-3.3.1.min.js"></script>
 		<script src="game/game.js"></script>

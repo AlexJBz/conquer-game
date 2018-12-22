@@ -4,6 +4,20 @@ body {
     overflow: hidden;
     background-color:transparent;
 }
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+.column {
+    float:left;
+    display:block;
+    margin-top:5px;
+    margin-right:5px;
+}
+.column.right {
+    width:450px;
+}
 .background {
     width:100%;
     height:100%;
@@ -24,24 +38,38 @@ body {
     text-align:center;
     border-radius:5px;
 }
-.mainDiv.countryInfo {
-    margin:0;
+.mainDiv.page {
     visibility: hidden;
-    margin-top:5px;
-    left:-350px;
+    position:relative;
+    width:450px;
+    height:445px;
+}
+div.parent {
+    display: grid;
+    grid-template-columns: 1fr;
+}
+div.parent div.child {
+    grid-row-start: 1;
+    grid-column-start: 1;
+}
+div.child {
+    visibility: hidden;
+}
+.mainDiv.page div.content {
+    text-align:left;
+}
+.mainDiv.page div.content p {
+    margin:0px 0px 5px 15px;
+}
+.mainDiv.countryInfo {    
+    position:relative;
+    visibility: hidden;
+    margin:0;
     width:410px;
     height:170px;
-    border-radius: 0px 5px 5px 0px
+    border-radius: 0px 5px 5px 0px;
+    margin-bottom:5px;
 }
-
-.mainDiv.countryInfo .label {
-    float:left;
-    width:60px;
-    height:170px;
-    line-height:170px;
-    font-weight:bolder;
-}
-
 .mainDiv.countryInfo div.mainContent {
     float:left;
     width:350px;
@@ -56,7 +84,7 @@ body {
     margin-top:10px;
     margin-bottom:5px;
 }
-.mainDiv.countryInfo hr {
+hr {
     width:95%;
     border:1px solid black;
     box-shadow: 1px 1px 3px grey;
@@ -70,6 +98,10 @@ body {
     padding-bottom:5px;
     font-size:16px;
 }
+.mainDiv.countryInfo span.label {
+    font-size:32px;
+    line-height:170px;
+}
 .mainDiv.mainDiv.countryInfo h1 {
     text-align:left;
     width:240px;
@@ -80,8 +112,10 @@ body {
     padding-bottom:5px;
 }
 .mainDiv.create {
-    width:300px;
-    height:198px;
+    min-width:300px;
+    min-height:198px;
+    max-width:300px;
+    max-height:198px;
 }
 .mainDiv.difficulty {
     visibility: hidden;
@@ -150,17 +184,9 @@ body {
 .mainDiv button.red:active {
     background: #e00000;
 }
-
-ul {
-    position: absolute;
-    list-style: none;
-    margin:0;
-    padding:0;
-}
-
 .slideDiv {
     visibility: hidden;
-    position:absolute;
+    position: relative;
     background-color:white;
     border:solid 2px #d1d1d1;    
     box-shadow: 3px 3px 5px #0072ba;
@@ -171,6 +197,15 @@ ul {
     height:60px;
     width:180px;
     text-align:center;
+    margin-bottom:5px;
+    cursor:pointer;
+}
+
+.slideDiv:hover {
+    background-color:#f7f7f7;
+}
+.slideDiv:active {
+    background-color:#e8e8e8;
 }
 
 .slideDiv span {
@@ -179,20 +214,14 @@ ul {
     text-align:center;
     width:60px;
     height:60px;
+    line-height:60px;
+    font-size:32px;
 }
 
-.slideDiv.eco {
-    margin-top:189px;
-}
-
-.slideDiv.land {
-    margin-top:264px;
-}
-
-.slideDiv.man {
-    margin-top:339px;
-}
-
-.slideDiv.mil {
-    margin-top:414px;
+.slideDiv p {
+    float:left;
+    text-align:center;
+    width:120px;
+    margin:0;
+    padding:0;
 }

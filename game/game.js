@@ -39,6 +39,15 @@ class LandHandler {
 	}
 }
 
+class Resource {
+	constructor(name, stockpile, value, sellratio){
+		this.name = name;
+		this.stockpile = stockpile;
+		this.value = value;
+		this.sellratio = sellratio;
+	}
+}
+
 class AICountry {
 	constructor(name, leadername, treasury, land, milpower, ecopower){
 		this.name = name;
@@ -104,36 +113,38 @@ $(".difficultyButton").on('click', function(){
 	}
 });
 
-$(".countryInfo").on('mouseover', function(){
-	if ($(this).css("left") == "-350px") {
-		$(this).animate({left:'0px'}, {queue: false, duration: 250});
-	}
-});
-
-$(".countryInfo").on('mouseleave', function(){
-	if ($(this).css("left") == "0px") {
-		$(this).animate({left:'-350px'}, {queue: false, duration: 250});
-	}
-});
-
-$(".slideDiv").on('mouseover', function(){
+$(".slideDiv").on('click', function(){
 	if ($(this).css("left") == "-120px") {
+		$(".slideDiv").animate({left:'-120px'}, {queue: false, duration: 250});
 		$(this).animate({left:'0px'}, {queue: false, duration: 250});
+		OpenPage($(this).data('page'));
+	} else if ($(this).css("left") == "0px") {
+		$(this).animate({left:'-120px'}, {queue: false, duration: 250});
+		ClosePage();
 	}
 });
 
-$(".slideDiv").on('mouseleave', function(){
-	if ($(this).css("left") == "0px") {
-		$(this).animate({left:'-120px'}, {queue: false, duration: 250});
-	}
-});
+function ClosePage() {
+	$(".page").css("visibility", "hidden");
+}
+
+function OpenPage(pageName) {
+	$(".page").css("visibility", "visible");
+	$("#pageTitle").html(pageName);
+	$(".child").css("visibility", "hidden");
+	$("."+pageName.toLowerCase()).css("visibility", "inherit");
+}
 
 function InitializeCountry(){
 	$("#conInfo").css("visibility", "visible");
 	$("#conName").html(player.country.name);
 	game.active = true;
 	player.eco = new EconomyHandler(0);
-	console.log(player.eco.money);
+	player.eco.resources = {};
+	player.eco.resources.coal = new Resource("Coal", 0, 0, 0.5);
+	player.eco.resources.oil = new Resource("Oil", 0, 0, 0.5);
+	player.eco.resources.iron = new Resource("Iron", 0, 0, 0.5);
+	player.eco.resources.bricks = new Resource("Bricks", 0, 0, 0.5);
 	$("#moneyDisplay").html(FormatNumberText(player.eco.money));
 	player.mil = new MilitaryHandler();
 	player.land = new LandHandler(1000);
@@ -141,6 +152,10 @@ function InitializeCountry(){
 	player.manpower = new ManpowerHandler(5000);
 	$("#manDisplay").html(FormatNumberText(player.manpower.manpower));
 	$(".slideDiv").css("visibility", "visible");
+}
+
+function UpdateAllText() {
+
 }
 
 function FormatNumberText(number){
