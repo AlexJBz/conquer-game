@@ -9,7 +9,6 @@
 		<meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=yes,width=device-width">
 	</head>
 	<body>
-		<div class="background"></div>
 		<div id="createCountryBody" class="mainDiv create">
 			<h1 id="createCountryTitle">Create Your Country</h1>
 			<input id="countryNameInput" type="text" placeholder="Country name..."/><br/>
@@ -35,7 +34,6 @@
 						<p class="stats"><b>Manpower: </b><span id="manDisplay">0</span></p>
 						<p class="stats"><b>Military Power: </b><span id="milDisplay">0</span></p>
 					</div>
-					<span class="ti-bar-chart label"></span>
 				</div>
 				<div class="slideDiv eco" data-page="Economy" >
 					<p>Economy</p><span class="ti-world"></span>
@@ -62,6 +60,42 @@
 								<p><b>Steel Stockpile: </b><span id="steelStockpile">0</span></p>
 								<p><b>Iron Stockpile: </b><span id="ironStockpile">0</span></p>
 								<p><b>Bricks Stockpile: </b><span id="bricksStockpile">0</span></p>
+								<hr/>
+								<div class="btn row">
+									<button class="resourceButton" data-resource="coal">Coal</button>
+									<button class="resourceButton" data-resource="oil">Oil</button>
+									<button class="resourceButton" data-resource="steel">Steel</button>
+									<button class="resourceButton" data-resource="iron">Iron</button>
+									<button class="resourceButton" data-resource="bricks">Bricks</button>
+								</div>
+								<hr/>
+								<div class="parent">
+									<div class="ecochild coal">
+										<h3>Coal</h3>
+										<p><b>Sell ratio:</b> <span id="coalSellRatio">50%</span></p>
+										<input class="slider" type="range" min="0" max="100" value="50" data-resource="coal"/>
+									</div>
+									<div class="ecochild oil">
+										<h3>Oil</h3>
+										<p><b>Sell ratio:</b> <span id="oilSellRatio">50%</span></p>
+										<input class="slider" type="range" min="0" max="100" value="50" data-resource="oil"/>
+									</div>
+									<div class="ecochild steel">
+										<h3>Steel</h3>
+										<p><b>Sell ratio:</b> <span id="steelSellRatio">50%</span></p>
+										<input class="slider" type="range" min="0" max="100" value="50" data-resource="steel"/>
+									</div>
+									<div class="ecochild iron">
+										<h3>Iron</h3>
+										<p><b>Sell ratio:</b> <span id="ironSellRatio">50%</span></p>
+										<input class="slider" type="range" min="0" max="100" value="50" data-resource="iron"/>
+									</div>
+									<div class="ecochild bricks">
+										<h3>Bricks</h3>
+										<p><b>Sell ratio:</b> <span id="bricksSellRatio">50%</span></p>
+										<input class="slider" type="range" min="0" max="100" value="50" data-resource="bricks"/>
+									</div>
+								</div>
 							</div>
 						</div>
 						<div class="child land">

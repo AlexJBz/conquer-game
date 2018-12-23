@@ -3,6 +3,32 @@ body {
     margin:0;
     background-color:transparent;
     overflow:auto;
+    background-color:#009dff;
+}
+.btn.row {
+    margin:auto;
+    display:block;
+    width:90%
+}
+.btn.row button.selected {
+    background-color:#09591c;
+}
+.btn.row button {
+    width: 20%;
+    margin:0;
+    font-size:12px;
+    padding:5px 0px 5px 0px;
+    float:left;
+}
+.btn.row button:not(:last-child) {
+    border-radius:0px 0px 0px 0px;
+    border-right:none;
+}
+.btn.row button:first-child {
+    border-radius:7px 0px 0px 7px;
+}
+.btn.row button:last-child {
+    border-radius:0px 7px 7px 0px;
 }
 .row:after {
     content: "";
@@ -16,7 +42,7 @@ body {
     margin-right:5px;
 }
 .column.right {
-    width:450px;
+    width:395px;
 }
 .background {
     width:100%;
@@ -41,7 +67,7 @@ body {
 .mainDiv.page {
     visibility: hidden;
     position:relative;
-    width:450px;
+    width:395px;
     height:445px;
 }
 div.parent {
@@ -52,6 +78,43 @@ div.parent div.child {
     grid-row-start: 1;
     grid-column-start: 1;
 }
+
+div.parent div.ecochild {
+    grid-row-start: 1;
+    grid-column-start: 1;
+    visibility: hidden;
+}
+.slider {
+    -webkit-appearance: none;
+    appearance: none;
+    margin:0px 0px 0px 15px;
+    box-shadow:none;
+    width:150px;
+    outline:none;
+    border-radius:10px;
+    border:none;
+    background-color:#d1d1d1;
+    height:10px;
+}
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    border-radius:15px;
+    background: #12842d;
+    cursor: pointer;
+}
+.slider::-webkit-slider-thumb:hover {
+    background:#0d7c28;
+}
+.slider::-webkit-slider-thumb:active {
+    background:#0c6d23;
+}
+.ecochild h3 {
+    margin:0px 0px 5px 15px;
+}
+
 div.child {
     visibility: hidden;
 }
@@ -65,8 +128,9 @@ div.child {
     position:relative;
     visibility: hidden;
     margin:0;
-    width:410px;
-    height:170px;
+    max-width:410px;
+    max-height:170px;
+    min-height:170px;
     border-radius: 0px 5px 5px 0px;
     margin-bottom:5px;
 }
@@ -98,10 +162,6 @@ hr {
     padding-bottom:5px;
     font-size:16px;
 }
-.mainDiv.countryInfo span.label {
-    font-size:32px;
-    line-height:170px;
-}
 .mainDiv.mainDiv.countryInfo h1 {
     text-align:left;
     width:240px;
@@ -129,7 +189,7 @@ hr {
     padding-top:10px;
 
 }
-.mainDiv input {
+.mainDiv input[type="text"] {
     text-align:center;
     margin-top:15px;
     width:80%;
@@ -141,7 +201,7 @@ hr {
     font-weight:bold;
     box-shadow: 2px 2px 4px #cccccc;
 }
-.mainDiv input:focus {
+.mainDiv input[type="text"]:focus {
     background-color:#f4f4f4;
 }
 .mainDiv button {

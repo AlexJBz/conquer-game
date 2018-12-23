@@ -17,6 +17,18 @@ class Country {
 class EconomyHandler {
 	constructor(money){
 		this.money = money;
+		this.resources = new Array(5);
+		this.buildings = [];
+	}
+}
+
+class Building {
+	constructor(name, resource, cost, production, landspace){
+		this.name = name;
+		this.resource = resource;
+		this.cost = cost;
+		this.production = production;
+		this.landspace = landspace;
 	}
 }
 
@@ -26,9 +38,32 @@ class MilitaryHandler {
 	}
 }
 
+class Branch {
+	constructor(name, attack, defense){
+		this.name = name;
+		this.attack = attack;
+		this.defense = defense;
+		this.units = new Array();
+	}
+}
+
+class Unit {
+	constructor(name, count, cost, maint, branch, attack, defense){
+		this.name = name;
+		this.count = count;
+		this.cost = cost;
+		this.maint = maint;
+		this.branch = branch;
+		this.attack = attack;
+		this.defense = defense;
+	}
+}
+
 class ManpowerHandler {
 	constructor(manpower){
 		this.manpower = manpower;
+		this.availableManpower = manpower;
+		this.usedManpower = 0;
 	}
 }
 
@@ -36,6 +71,7 @@ class LandHandler {
 	constructor(land){
 		this.availableLand = land;
 		this.totalLand = land;
+		this.usedLand = 0;
 	}
 }
 
@@ -90,21 +126,21 @@ $(".difficultyButton").on('click', function(){
 			$("#difficultySelector").remove();
 			$(".pDif").css("color", "#12842d");
 			$(".pDif").html("Easy");
-			InitializeCountry();
+			InitializeGame();
 			break;
 		case "normal":
 			player.difficulty = 1;
 			$("#difficultySelector").remove();
 			$(".pDif").css("color", "#ff9900");
 			$(".pDif").html("Normal");
-			InitializeCountry();
+			InitializeGame();
 			break;
 		case "hard":
 			player.difficulty = 0.5;
 			$("#difficultySelector").remove();
 			$(".pDif").css("color", "#ff0000");
 			$(".pDif").html("Hard");
-			InitializeCountry();
+			InitializeGame();
 			break;
 		default:
 			$("#difSelectTitle").html("Oi, don't be cheeky");
@@ -124,6 +160,24 @@ $(".slideDiv").on('click', function(){
 	}
 });
 
+//NEED TO ADD ERROR HANDLING BECAUSE SOME PEOPLE MIGHT BE STUPID
+$(".resourceButton").on('click', function(){
+	$(".resourceButton").removeClass("selected");
+	$(this).toggleClass("selected");
+	$(".ecochild").css("visibility", "hidden");
+	$("."+$(this).data("resource")).css("visibility", "inherit");
+});
+
+$(".slider").on('change', function(){
+	var resourcename = $(this).data("resource");
+	player.eco.resources.forEach(res => {
+		if (res.name.toLowerCase() == resourcename) {
+			res.sellratio = ($(this).val() / 100);
+			game.UpdateText();
+		}
+	});
+});
+
 function ClosePage() {
 	$(".page").css("visibility", "hidden");
 }
@@ -135,29 +189,75 @@ function OpenPage(pageName) {
 	$("."+pageName.toLowerCase()).css("visibility", "inherit");
 }
 
-function InitializeCountry(){
+function InitializeGame(){
 	$("#conInfo").css("visibility", "visible");
 	$("#conName").html(player.country.name);
-	game.active = true;
 	player.eco = new EconomyHandler(0);
-	player.eco.resources = {};
-	player.eco.resources.coal = new Resource("Coal", 0, 0, 0.5);
-	player.eco.resources.oil = new Resource("Oil", 0, 0, 0.5);
-	player.eco.resources.iron = new Resource("Iron", 0, 0, 0.5);
-	player.eco.resources.bricks = new Resource("Bricks", 0, 0, 0.5);
-	$("#moneyDisplay").html(FormatNumberText(player.eco.money));
+	player.eco.resources[0] = new Resource("Coal", 0, 0, 0.5);
+	player.eco.resources[1] = new Resource("Oil", 0, 0, 0.5);
+	player.eco.resources[2] = new Resource("Steel", 0, 0, 0.5);
+	player.eco.resources[3] = new Resource("Iron", 0, 0, 0.5);
+	player.eco.resources[4] = new Resource("Bricks", 0, 0, 0.5);
+	player.eco.buildings[player.eco.buildings.length] = new Building("Coal Mine", player.eco.resources[0], 100, 1, 10);
 	player.mil = new MilitaryHandler();
 	player.land = new LandHandler(1000);
-	$("#landDisplay").html(FormatNumberText(player.land.availableLand));
 	player.manpower = new ManpowerHandler(5000);
-	$("#manDisplay").html(FormatNumberText(player.manpower.manpower));
 	$(".slideDiv").css("visibility", "visible");
+	game.Init();
 }
 
-function UpdateAllText() {
-
+game.UpdateText = function() {
+	//Main Stats
+	$("#moneyDisplay").html(FormatNumber(player.eco.money));
+	$("#ecoDisplay").html(FormatNumber(player.ecopower));
+	$("#landDisplay").html(FormatNumber(player.land.totalLand));
+	$("#manDisplay").html(FormatNumber(player.manpower.manpower));
+	$("#milDisplay").html(FormatNumber(player.milpower));
+	//Seperate Pages
+	//Economy
+	$("#coalStockpile").html(FormatNumber(player.eco.resources[0].stockpile));
+	$("#oilStockpile").html(FormatNumber(player.eco.resources[1].stockpile));
+	$("#steelStockpile").html(FormatNumber(player.eco.resources[2].stockpile));
+	$("#ironStockpile").html(FormatNumber(player.eco.resources[3].stockpile));
+	$("#bricksStockpile").html(FormatNumber(player.eco.resources[4].stockpile));
+		//Individual sub-pages text
+		$("#coalSellRatio").html(FormatNumber(player.eco.resources[0].sellratio * 100 + "%"));
+		$("#oilSellRatio").html(FormatNumber(player.eco.resources[1].sellratio * 100 + "%"));
+		$("#steelSellRatio").html(FormatNumber(player.eco.resources[2].sellratio * 100 + "%"));
+		$("#ironSellRatio").html(FormatNumber(player.eco.resources[3].sellratio * 100 + "%"));
+		$("#bricksSellRatio").html(FormatNumber(player.eco.resources[4].sellratio * 100 + "%"));
+	//Land
+	$("#totalLand").html(FormatNumber(player.land.land));
+	$("#landAvailable").html(FormatNumber(player.land.availableLand));
+	$("#landUsed").html(FormatNumber(player.land.landUsed));
+	//Manpower
+	$("#totalManpower").html(FormatNumber(player.manpower.manpower));
+	$("#manpowerAvailable").html(FormatNumber(player.manpower.availableManpower));
+	$("#manpowerUsed").html(FormatNumber(player.manpower.usedManpower));
+	//Army
+	$("#armyUnitCount").html(FormatNumber(0));
+	$("#navyUnitCount").html(FormatNumber(0));
+	$("#airforceUnitCount").html(FormatNumber(0));
 }
 
-function FormatNumberText(number){
+function FormatNumber(number){
 	return number;
+}
+
+game.Init = function(){
+	game.TickCycle();
+	game.UpdateText();
+}
+
+game.TickCycle = function(){
+	game.DoProduction();
+
+	game.UpdateText();
+	setTimeout(game.TickCycle, 1000);
+}
+
+game.DoProduction = function(){
+	player.eco.buildings.forEach(building => {
+		building.resource.stockpile += building.production;
+	});
 }
